@@ -1,164 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brain Biscuit — Break a biscuit, feed your brain!</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brain Biscuit — Break a biscuit, feed your brain!</title>
+<meta name="description" content="Solve riddles, add your own brain teasers, and climb the global leaderboard on Brain Biscuit.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Header Navigation -->
-  <header class="site-header">
-    <div class="container header-container">
-      <a href="#" class="logo">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
-          <path d="M12 7V12L15 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>Brain Biscuit</span>
-      </a>
-      <nav class="main-nav">
-        <a href="#challenges">Challenges</a>
-        <a href="#leaderboard">Leaderboard</a>
-        <a href="#add-question" class="nav-cta">Add Riddle</a>
-      </nav>
-    </div>
-  </header>
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="logo" aria-label="Brain Biscuit home">
+      <svg class="logo-mark" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="17" cy="17" r="15" fill="#E2703A"/>
+        <circle cx="12" cy="13" r="1.8" fill="#2B2118" opacity="0.35"/>
+        <circle cx="21" cy="11" r="1.4" fill="#2B2118" opacity="0.3"/>
+        <circle cx="22" cy="19" r="1.6" fill="#2B2118" opacity="0.3"/>
+        <circle cx="14" cy="22" r="1.3" fill="#2B2118" opacity="0.3"/>
+      </svg>
+      <span class="logo-text">Brain Biscuit</span>
+    </a>
 
-  <main>
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-      <div class="hero-bg"></div> <!-- Background image applied via CSS -->
-      <div class="hero-overlay"></div>
-      <div class="container hero-content">
-        <h1 class="fade-in">Break a biscuit, <span>feed your brain!</span></h1>
-        <p class="hero-subtitle fade-in">Dive into a world of daily puzzles, craft your own riddles, and challenge your intellect.</p>
-        <a href="#challenges" class="btn btn-primary btn-large fade-in">Start Solving</a>
-      </div>
-    </section>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="#puzzles">Daily Puzzles</a>
+      <a href="#add-question">Add a Riddle</a>
+      <a href="#iq-test">IQ Test</a>
+      <a href="#leaderboard">Leaderboard</a>
+    </nav>
 
-    <!-- Challenge Arena Section -->
-    <section id="challenges" class="section-padding">
-      <div class="container">
-        <div class="section-heading text-center">
-          <h2>The Challenge Arena</h2>
-          <p>Your daily dose of mental gymnastics.</p>
-        </div>
+    <a href="#puzzles" class="btn btn-primary btn-small">Start Solving</a>
 
-        <div class="card-grid">
-          <!-- Daily Puzzles Card -->
-          <div class="card challenge-card">
-            <div class="card-icon">🧩</div>
-            <h3>Daily Puzzles</h3>
-            <ul class="puzzle-list">
-              <li><span class="puzzle-dot"></span> The Enigma of Time</li>
-              <li><span class="puzzle-dot"></span> Logic Loop</li>
-              <li><span class="puzzle-dot"></span> The Vanishing Point</li>
-            </ul>
-            <button class="btn btn-secondary btn-block">View All Puzzles</button>
-          </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 
-          <!-- Add Your Own Question Card -->
-          <div class="card challenge-card">
-            <div class="card-icon">✍️</div>
-            <h3>Add Your Own Question</h3>
-            <p class="card-description">Stump the community with your own creative riddle.</p>
-            <button class="btn btn-primary btn-block" id="show-form-btn">Create a Riddle</button>
-          </div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+    <a href="#puzzles">Daily Puzzles</a>
+    <a href="#add-question">Add a Riddle</a>
+    <a href="#iq-test">IQ Test</a>
+    <a href="#leaderboard">Leaderboard</a>
+  </nav>
+</header>
 
-          <!-- IQ Test Card -->
-          <div class="card challenge-card">
-            <div class="card-icon">⏱️</div>
-            <h3>IQ Test</h3>
-            <p class="card-description">Take a quick, fun logic challenge against the clock.</p>
-            <button class="btn btn-secondary btn-block">Begin IQ Test</button>
-          </div>
-        </div>
+<main id="top">
 
-        <!-- Add Question Form (Hidden by default) -->
-        <div id="add-question" class="form-container card" style="display: none;">
-          <h3>Submit Your Riddle</h3>
-          <form id="riddle-form">
-            <div class="form-group">
-              <label for="question-title">Question Title</label>
-              <input type="text" id="question-title" name="questionTitle" placeholder="e.g., The Midnight Mystery" required>
-            </div>
-            
-            <div class="form-row">
-              <div class="form-group">
-                <label for="option-a">Option A</label>
-                <input type="text" id="option-a" name="optionA" required>
-              </div>
-              <div class="form-group">
-                <label for="option-b">Option B</label>
-                <input type="text" id="option-b" name="optionB" required>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="option-c">Option C</label>
-                <input type="text" id="option-c" name="optionC" required>
-              </div>
-              <div class="form-group">
-                <label for="option-d">Option D</label>
-                <input type="text" id="option-d" name="optionD" required>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="correct-answer">Correct Answer</label>
-              <input type="text" id="correct-answer" name="correctAnswer" placeholder="e.g., Option B" required>
-            </div>
-            
-            <button type="submit" class="btn btn-primary btn-block">Submit Riddle</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- Global Leaderboard Section -->
-    <section id="leaderboard" class="section-padding leaderboard-section">
-      <div class="container">
-        <div class="section-heading text-center">
-          <h2>Global Leaderboard</h2>
-          <p>Top minds of the week.</p>
-        </div>
-        
-        <div class="card table-card">
-          <table class="leaderboard-table">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>User</th>
-                <th>Score</th>
-              </tr>
-            </thead>
-            <tbody id="leaderboard-body">
-              <!-- Populated by JavaScript -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container footer-container">
-      <div class="footer-logo">Brain Biscuit</div>
-      <p class="copyright">© 2024 Brain Biscuit. All rights reserved.</p>
-      <div class="social-links">
-        <a href="#" aria-label="Twitter">𝕏</a>
-        <a href="#" aria-label="Instagram">📸</a>
-        <a href="#" aria-label="Discord">💬</a>
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-inner reveal">
+      <p class="eyebrow">A puzzle-solving playground</p>
+      <h1 class="hero-title">Break a biscuit,<br>feed your brain.</h1>
+      <p class="hero-tagline">Brain Biscuit is where riddles get cracked, questions get crowdsourced, and bragging rights get earned — one glowing puzzle piece at a time.</p>
+      <div class="hero-actions">
+        <a href="#puzzles" class="btn btn-primary">Start Solving</a>
+        <a href="#leaderboard" class="btn btn-ghost">See the leaderboard</a>
       </div>
     </div>
-  </footer>
+    <div class="hero-illustration reveal" aria-hidden="false">
+      <svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="heroTitle">
+        <title id="heroTitle">Illustration of a team collaborating around a glowing biscuit-shaped puzzle stage with a floating brain</title>
+        <defs>
+          <radialGradient id="glowViolet" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#8C7CFF" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#8C7CFF" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="glowCyan" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#4CC9F0" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#4CC9F0" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="biscuitFill" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E7C596"/>
+            <stop offset="100%" stop-color="#C99A5B"/>
+          </linearGradient>
+          <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#A79BFF"/>
+            <stop offset="100%" stop-color="#6C63FF"/>
+          </linearGradient>
+          <linearGradient id="puzzleA" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F7B899"/>
+            <stop offset="100%" stop-color="#E2703A"/>
+          </linearGradient>
+          <linearGradient id="puzzleB" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7FE0F0"/>
+            <stop offset="100%" stop-color="#4CC9F0"/>
+          </linearGradient>
+        </defs>
 
-  <script src="script.js"></script>
+        <!-- ambient glow -->
+        <ellipse cx="450" cy="330" rx="380" ry="300" fill="url(#glowViolet)"/>
+        <ellipse cx="620" cy="450" rx="260" ry="220" fill="url(#glowCyan)"/>
+
+        <!-- biscuit stage (broken cookie shape) -->
+        <path d="M180 470
+                 C160 400, 170 320, 230 280
+                 C260 200, 350 165, 430 190
+                 C500 140, 600 165, 640 230
+                 C720 250, 760 330, 730 400
+                 C760 460, 720 530, 640 540
+                 C590 610, 480 620, 420 570
+                 C340 600, 250 570, 220 500
+                 C195 495, 185 485, 180 470 Z"
+              fill="url(#biscuitFill)" opacity="0.9"/>
+        <!-- biscuit "chips" -->
+        <circle cx="300" cy="330" r="10" fill="#8A5A2B" opacity="0.35"/>
+        <circle cx="520" cy="260" r="8" fill="#8A5A2B" opacity="0.3"/>
+        <circle cx="600" cy="440" r="9" fill="#8A5A2B" opacity="0.3"/>
+        <circle cx="360" cy="500" r="7" fill="#8A5A2B" opacity="0.3"/>
+        <circle cx="470" cy="420" r="6" fill="#8A5A2B" opacity="0.25"/>
+
+        <!-- floating brain, centered above stage -->
+        <g transform="translate(450 300)">
+          <path d="M-60 -10
+                   C-70 -45, -35 -65, -10 -55
+                   C0 -68, 25 -68, 35 -55
+                   C65 -60, 85 -35, 72 -10
+                   C90 5, 85 35, 60 42
+                   C55 62, 25 70, 5 58
+                   C-15 70, -45 62, -50 42
+                   C-75 35, -78 5, -60 -10 Z"
+                fill="url(#brainGrad)" stroke="#4A3FCC" stroke-width="2"/>
+          <path d="M-10 -55 C-10 -20, 0 0, 5 58" fill="none" stroke="#4A3FCC" stroke-width="1.5" opacity="0.5"/>
+          <path d="M-40 -20 C-25 -10, -25 10, -40 20" fill="none" stroke="#4A3FCC" stroke-width="1.5" opacity="0.5"/>
+          <path d="M40 -20 C25 -10, 25 10, 40 20" fill="none" stroke="#4A3FCC" stroke-width="1.5" opacity="0.5"/>
+        </g>
+
+        <!-- floating puzzle pieces -->
+        <g transform="translate(260 220) rotate(-12)">
+          <path d="M0 20 h30 a10 10 0 0 1 0 20 v10 h20 v-50 h-20 a10 10 0 0 1 0-20 h-30 z" fill="url(#puzzleA)"/>
+        </g>
+        <g transform="translate(600 190) rotate(18)">
+          <path d="M0 20 h30 a10 10 0 0 1 0 20 v10 h20 v-50 h-20 a10 10 0 0 1 0-20 h-30 z" fill="url(#puzzleB)"/>
+        </g>
+        <g transform="translate(640 340) rotate(-8)">
+          <path d="M0 20 h30 a10 10 0 0 1 0 20 v10 h20 v-50 h-20 a10 10 0 0 1 0-20 h-30 z" fill="url(#puzzleA)" opacity="0.85"/>
+        </g>
+
+        <!-- connecting glow lines -->
+        <g stroke="#8C7CFF" stroke-width="2" opacity="0.45" stroke-dasharray="4 6">
+          <line x1="330" y1="470" x2="410" y2="330"/>
+          <line x1="480" y1="470" x2="470" y2="340"/>
+          <line x1="580" y1="480" x2="520" y2="330"/>
+        </g>
+
+        <!-- abstract collaborating figures around the stage -->
+        <g>
+          <!-- figure 1 -->
+          <circle cx="330" cy="500" r="26" fill="#E2703A"/>
+          <path d="M290 570 Q330 520 370 570 L370 610 L290 610 Z" fill="#2B2118"/>
+          <!-- figure 2 -->
+          <circle cx="470" cy="510" r="26" fill="#4CC9F0"/>
+          <path d="M430 580 Q470 530 510 580 L510 620 L430 620 Z" fill="#2B2118"/>
+          <!-- figure 3 -->
+          <circle cx="580" cy="495" r="24" fill="#6C63FF"/>
+          <path d="M542 562 Q580 515 618 562 L618 600 L542 600 Z" fill="#2B2118"/>
+        </g>
+
+        <!-- small glow sparks -->
+        <circle cx="230" cy="250" r="4" fill="#4CC9F0"/>
+        <circle cx="700" cy="280" r="5" fill="#8C7CFF"/>
+        <circle cx="670" cy="470" r="4" fill="#4CC9F0"/>
+        <circle cx="250" cy="450" r="4" fill="#8C7CFF"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- signature snapped-biscuit divider -->
+  <div class="biscuit-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <path d="M0,0 L1200,0 L1200,20
+               C1180,45 1155,10 1130,30
+               C1105,50 1080,15 1055,35
+               C1030,55 1005,20 980,32
+               C955,44 930,12 905,28
+               C880,44 855,10 830,30
+               C805,50 780,18 755,34
+               C730,50 705,16 680,30
+               C655,44 630,12 605,28
+               C580,44 555,14 530,32
+               C505,50 480,18 455,34
+               C430,50 405,16 380,30
+               C355,44 330,12 305,28
+               C280,44 255,14 230,32
+               C205,50 180,18 155,34
+               C130,50 105,16 80,30
+               C55,44 30,12 0,26 Z" fill="#FAF3E6"/>
+    </svg>
+  </div>
+
+  <!-- ============ CHALLENGE ARENA ============ -->
+  <section class="arena" id="arena">
+    <div class="section-heading reveal">
+      <p class="eyebrow">The challenge arena</p>
+      <h2>Three ways to test your crumbs of genius</h2>
+    </div>
+
+    <div class="arena-grid">
+
+      <!-- Daily Puzzles -->
+      <article class="card card-puzzles reveal" id="puzzles">
+        <div class="card-icon" aria-hidden="true">🧩</div>
+        <h3>Daily Puzzles</h3>
+        <p class="card-sub">Fresh riddles, dropped every day.</p>
+        <ul class="puzzle-list">
+          <li>
+            <span class="puzzle-name">The Enigma of Time</span>
+            <span class="tag tag-medium">Medium</span>
+          </li>
+          <li>
+            <span class="puzzle-name">Logic Loop</span>
+            <span class="tag tag-hard">Hard</span>
+          </li>
+          <li>
+            <span class="puzzle-name">The Missing Piece</span>
+            <span class="tag tag-easy">Easy</span>
+          </li>
+        </ul>
+        <a href="#" class="btn btn-outline">View all puzzles</a>
+      </article>
+
+      <!-- Add Your Own Question -->
+      <article class="card card-form reveal" id="add-question">
+        <div class="card-icon" aria-hidden="true">✏️</div>
+        <h3>Add Your Own Question</h3>
+        <p class="card-sub">Stump the community with your best riddle.</p>
+
+        <form id="riddleForm" novalidate>
+          <div class="field">
+            <label for="qTitle">Question Title</label>
+            <input type="text" id="qTitle" name="qTitle" placeholder="e.g. The Clockmaker's Riddle" required>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="optA">Option A</label>
+              <input type="text" id="optA" name="optA" placeholder="Option A" required>
+            </div>
+            <div class="field">
+              <label for="optB">Option B</label>
+              <input type="text" id="optB" name="optB" placeholder="Option B" required>
+            </div>
+            <div class="field">
+              <label for="optC">Option C</label>
+              <input type="text" id="optC" name="optC" placeholder="Option C" required>
+            </div>
+            <div class="field">
+              <label for="optD">Option D</label>
+              <input type="text" id="optD" name="optD" placeholder="Option D" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="correctAnswer">Correct Answer</label>
+            <select id="correctAnswer" name="correctAnswer" required>
+              <option value="" disabled selected>Choose the correct option</option>
+              <option value="A">Option A</option>
+              <option value="B">Option B</option>
+              <option value="C">Option C</option>
+              <option value="D">Option D</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">Submit Riddle</button>
+          <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+        </form>
+      </article>
+
+      <!-- IQ Test -->
+      <article class="card card-iq reveal" id="iq-test">
+        <div class="card-icon" aria-hidden="true">⏱️</div>
+        <h3>IQ Test</h3>
+        <p class="card-sub">20 questions. One clock. No crumbs left behind.</p>
+        <div class="iq-timer">
+          <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="27" fill="none" stroke="#EFE2CC" stroke-width="6"/>
+            <circle cx="32" cy="32" r="27" fill="none" stroke="#E2703A" stroke-width="6"
+                    stroke-dasharray="169.6" stroke-dashoffset="55" stroke-linecap="round" transform="rotate(-90 32 32)"/>
+            <text x="32" y="38" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="13" fill="#2B2118">12:00</text>
+          </svg>
+        </div>
+        <p class="iq-note">Average completion time: 14 minutes</p>
+        <button class="btn btn-primary btn-full" id="startIqTest">Begin IQ Test</button>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ LEADERBOARD ============ -->
+  <section class="leaderboard-section" id="leaderboard">
+    <div class="section-heading reveal">
+      <p class="eyebrow">Global leaderboard</p>
+      <h2>Top biscuit breakers this week</h2>
+    </div>
+
+    <div class="leaderboard-card reveal">
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">User</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboardBody">
+          <!-- Rows injected by script.js -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text">Brain Biscuit</span>
+      <p>Break a biscuit, feed your brain!</p>
+    </div>
+    <div class="footer-links" aria-label="Social links">
+      <a href="#" aria-label="Brain Biscuit on Instagram">Instagram</a>
+      <a href="#" aria-label="Brain Biscuit on X">X</a>
+      <a href="#" aria-label="Brain Biscuit on TikTok">TikTok</a>
+      <a href="#" aria-label="Brain Biscuit on Discord">Discord</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 Brain Biscuit. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
