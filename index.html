@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brain Biscuit — Break a biscuit, feed your brain!</title>
+<meta name="description" content="Solve riddles, add your own brain teasers, and climb the global leaderboard on Brain Biscuit.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="logo" aria-label="Brain Biscuit home">
+      <svg class="logo-mark" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="17" cy="17" r="15" fill="#E2703A"/>
+        <circle cx="12" cy="13" r="1.8" fill="#2B2118" opacity="0.35"/>
+        <circle cx="21" cy="11" r="1.4" fill="#2B2118" opacity="0.3"/>
+        <circle cx="22" cy="19" r="1.6" fill="#2B2118" opacity="0.3"/>
+        <circle cx="14" cy="22" r="1.3" fill="#2B2118" opacity="0.3"/>
+      </svg>
+      <span class="logo-text">Brain Biscuit</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <a href="#puzzles">Daily Puzzles</a>
+      <a href="#add-question">Add a Riddle</a>
+      <a href="#iq-test">IQ Test</a>
+      <a href="#leaderboard">Leaderboard</a>
+    </nav>
+
+    <a href="#puzzles" class="btn btn-primary btn-small">Start Solving</a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+    <a href="#puzzles">Daily Puzzles</a>
+    <a href="#add-question">Add a Riddle</a>
+    <a href="#iq-test">IQ Test</a>
+    <a href="#leaderboard">Leaderboard</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-inner reveal">
+      <p class="eyebrow">A puzzle-solving playground</p>
+      <h1 class="hero-title">Break a biscuit,<br>feed your brain.</h1>
+      <p class="hero-tagline">Brain Biscuit is where riddles get cracked, questions get crowdsourced, and bragging rights get earned — one glowing puzzle piece at a time.</p>
+      <div class="hero-actions">
+        <a href="#puzzles" class="btn btn-primary">Start Solving</a>
+        <a href="#leaderboard" class="btn btn-ghost">See the leaderboard</a>
+      </div>
+    </div>
+    <div class="hero-illustration reveal" aria-hidden="false">
+      <img src="assets/hero-illustration.svg" alt="A team of teens collaborating around a glowing biscuit-shaped puzzle stage with a floating brain and puzzle pieces">
+    </div>
+  </section>
+
+  <!-- signature snapped-biscuit divider -->
+  <div class="biscuit-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <path d="M0,0 L1200,0 L1200,20
+               C1180,45 1155,10 1130,30
+               C1105,50 1080,15 1055,35
+               C1030,55 1005,20 980,32
+               C955,44 930,12 905,28
+               C880,44 855,10 830,30
+               C805,50 780,18 755,34
+               C730,50 705,16 680,30
+               C655,44 630,12 605,28
+               C580,44 555,14 530,32
+               C505,50 480,18 455,34
+               C430,50 405,16 380,30
+               C355,44 330,12 305,28
+               C280,44 255,14 230,32
+               C205,50 180,18 155,34
+               C130,50 105,16 80,30
+               C55,44 30,12 0,26 Z" fill="#FAF3E6"/>
+    </svg>
+  </div>
+
+  <!-- ============ CHALLENGE ARENA ============ -->
+  <section class="arena" id="arena">
+    <div class="section-heading reveal">
+      <p class="eyebrow">The challenge arena</p>
+      <h2>Three ways to test your crumbs of genius</h2>
+    </div>
+
+    <div class="arena-grid">
+
+      <!-- Daily Puzzles -->
+      <article class="card card-puzzles reveal" id="puzzles">
+        <div class="card-icon" aria-hidden="true">🧩</div>
+        <h3>Daily Puzzles</h3>
+        <p class="card-sub">Fresh riddles, dropped every day.</p>
+        <ul class="puzzle-list">
+          <li>
+            <span class="puzzle-name">The Enigma of Time</span>
+            <span class="tag tag-medium">Medium</span>
+          </li>
+          <li>
+            <span class="puzzle-name">Logic Loop</span>
+            <span class="tag tag-hard">Hard</span>
+          </li>
+          <li>
+            <span class="puzzle-name">The Missing Piece</span>
+            <span class="tag tag-easy">Easy</span>
+          </li>
+        </ul>
+        <a href="#" class="btn btn-outline">View all puzzles</a>
+      </article>
+
+      <!-- Add Your Own Question -->
+      <article class="card card-form reveal" id="add-question">
+        <div class="card-icon" aria-hidden="true">✏️</div>
+        <h3>Add Your Own Question</h3>
+        <p class="card-sub">Stump the community with your best riddle.</p>
+
+        <form id="riddleForm" novalidate>
+          <div class="field">
+            <label for="qTitle">Question Title</label>
+            <input type="text" id="qTitle" name="qTitle" placeholder="e.g. The Clockmaker's Riddle" required>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="optA">Option A</label>
+              <input type="text" id="optA" name="optA" placeholder="Option A" required>
+            </div>
+            <div class="field">
+              <label for="optB">Option B</label>
+              <input type="text" id="optB" name="optB" placeholder="Option B" required>
+            </div>
+            <div class="field">
+              <label for="optC">Option C</label>
+              <input type="text" id="optC" name="optC" placeholder="Option C" required>
+            </div>
+            <div class="field">
+              <label for="optD">Option D</label>
+              <input type="text" id="optD" name="optD" placeholder="Option D" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="correctAnswer">Correct Answer</label>
+            <select id="correctAnswer" name="correctAnswer" required>
+              <option value="" disabled selected>Choose the correct option</option>
+              <option value="A">Option A</option>
+              <option value="B">Option B</option>
+              <option value="C">Option C</option>
+              <option value="D">Option D</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">Submit Riddle</button>
+          <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+        </form>
+      </article>
+
+      <!-- IQ Test -->
+      <article class="card card-iq reveal" id="iq-test">
+        <div class="card-icon" aria-hidden="true">⏱️</div>
+        <h3>IQ Test</h3>
+        <p class="card-sub">20 questions. One clock. No crumbs left behind.</p>
+        <div class="iq-timer">
+          <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="27" fill="none" stroke="#EFE2CC" stroke-width="6"/>
+            <circle cx="32" cy="32" r="27" fill="none" stroke="#E2703A" stroke-width="6"
+                    stroke-dasharray="169.6" stroke-dashoffset="55" stroke-linecap="round" transform="rotate(-90 32 32)"/>
+            <text x="32" y="38" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="13" fill="#2B2118">12:00</text>
+          </svg>
+        </div>
+        <p class="iq-note">Average completion time: 14 minutes</p>
+        <button class="btn btn-primary btn-full" id="startIqTest">Begin IQ Test</button>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ LEADERBOARD ============ -->
+  <section class="leaderboard-section" id="leaderboard">
+    <div class="section-heading reveal">
+      <p class="eyebrow">Global leaderboard</p>
+      <h2>Top biscuit breakers this week</h2>
+    </div>
+
+    <div class="leaderboard-card reveal">
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">User</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboardBody">
+          <!-- Rows injected by script.js -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text">Brain Biscuit</span>
+      <p>Break a biscuit, feed your brain!</p>
+    </div>
+    <div class="footer-links" aria-label="Social links">
+      <a href="#" aria-label="Brain Biscuit on Instagram">Instagram</a>
+      <a href="#" aria-label="Brain Biscuit on X">X</a>
+      <a href="#" aria-label="Brain Biscuit on TikTok">TikTok</a>
+      <a href="#" aria-label="Brain Biscuit on Discord">Discord</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 Brain Biscuit. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
