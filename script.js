@@ -1,177 +1,136 @@
-// ==========================================================================
-// Brain Biscuit — script.js
-// ==========================================================================
-
+// === WAIT FOR DOM TO LOAD ===
 document.addEventListener('DOMContentLoaded', () => {
-  initMobileNav();
-  initSmoothScroll();
-  initRiddleForm();
-  initLeaderboard();
-  initIqTestButton();
-});
-
-/* --------------------------------------------------------------------------
-   Mobile navigation toggle
-   -------------------------------------------------------------------------- */
-function initMobileNav() {
-  const toggle = document.getElementById('navToggle');
-  const mobileNav = document.getElementById('mobileNav');
-  if (!toggle || !mobileNav) return;
-
-  toggle.addEventListener('click', () => {
-    const isOpen = mobileNav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', String(isOpen));
-  });
-
-  // Close menu after selecting a link
-  mobileNav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      mobileNav.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-}
-
-/* --------------------------------------------------------------------------
-   Smooth scrolling for in-page anchor links
-   -------------------------------------------------------------------------- */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  
+  // 1. SMOOTH SCROLLING FOR NAVIGATION LINKS
+  const navLinks = document.querySelectorAll('a[href^="#"]');
+  navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-      const targetId = link.getAttribute('href');
-      if (!targetId || targetId === '#') return;
-      const target = document.querySelector(targetId);
-      if (!target) return;
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const targetId = link.getAttribute('href');
+      if (targetId === '#') return;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   });
-}
 
-/* --------------------------------------------------------------------------
-   "Add Your Own Question" form — mock submission
-   -------------------------------------------------------------------------- */
-function initRiddleForm() {
-  const form = document.getElementById('riddleForm');
-  const message = document.getElementById('formMessage');
-  if (!form || !message) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-    const riddle = {
-      title: formData.get('qTitle')?.toString().trim(),
-      options: {
-        A: formData.get('optA')?.toString().trim(),
-        B: formData.get('optB')?.toString().trim(),
-        C: formData.get('optC')?.toString().trim(),
-        D: formData.get('optD')?.toString().trim(),
-      },
-      correctAnswer: formData.get('correctAnswer'),
-      submittedAt: new Date().toISOString(),
-    };
-
-    // Basic validation
-    const hasEmptyField = !riddle.title || !riddle.correctAnswer ||
-      Object.values(riddle.options).some((v) => !v);
-
-    if (hasEmptyField) {
-      message.textContent = 'Please fill in every field before submitting.';
-      message.classList.remove('success');
-      return;
-    }
-
-    // Mock submission — in a real app this would POST to a backend/API
-    console.log('New riddle submitted:', riddle);
-
-    message.textContent = `"${riddle.title}" was added. Thanks for feeding the brain!`;
-    message.classList.add('success');
-    form.reset();
-  });
-}
-
-/* --------------------------------------------------------------------------
-   Leaderboard — sample data, sorted by score, rendered into the table
-   -------------------------------------------------------------------------- */
-function initLeaderboard() {
-  const tbody = document.getElementById('leaderboardBody');
-  if (!tbody) return;
-
-  const sampleScores = [
-    { user: 'Nova Chen', score: 2840 },
-    { user: 'Milo Reyes', score: 3120 },
-    { user: 'Aisha Patel', score: 2695 },
-    { user: 'Théo Laurent', score: 2990 },
-    { user: 'Zara Okafor', score: 3260 },
+  // 2. LEADERBOARD DATA & SORTING FUNCTION
+  const leaderboardData = [
+    { rank: 1, user: 'AlexTheGreat', score: 2500 },
+    { rank: 2, user: 'RiddleQueen', score: 2350 },
+    { rank: 3, user: 'LogicLord', score: 2200 },
+    { rank: 4, user: 'PuzzlePirate', score: 2100 },
+    { rank: 5, user: 'BrainyBella', score: 1950 },
   ];
 
-  const sorted = sortLeaderboardByScore(sampleScores);
-  renderLeaderboard(tbody, sorted);
-}
+  function sortLeaderboard(data) {
+    // Sort by score descending (just to be safe, even though sample is sorted)
+    return data.sort((a, b) => b.score - a.score);
+  }
 
-/**
- * Sorts an array of { user, score } objects by score, descending.
- * Does not mutate the original array.
- */
-function sortLeaderboardByScore(entries) {
-  return [...entries].sort((a, b) => b.score - a.score);
-}
+  function renderLeaderboard(data) {
+    const tbody = document.getElementById('leaderboard-body');
+    if (!tbody) return;
+    
+    tbody.innerHTML = ''; // Clear existing rows
+    
+    data.forEach((entry, index) => {
+      const row = document.createElement('tr');
+      
+      // Rank with badge for top 3
+      const rankCell = document.createElement('td');
+      const rankBadge = document.createElement('span');
+      rankBadge.classList.add('rank-badge');
+      rankBadge.textContent = entry.rank;
+      rankCell.appendChild(rankBadge);
+      
+      const userCell = document.createElement('td');
+      userCell.textContent = entry.user;
+      
+      const scoreCell = document.createElement('td');
+      scoreCell.textContent = entry.score.toLocaleString();
+      
+      row.appendChild(rankCell);
+      row.appendChild(userCell);
+      row.appendChild(scoreCell);
+      
+      tbody.appendChild(row);
+    });
+  }
 
-function renderLeaderboard(tbody, entries) {
-  const rankStyles = ['gold', 'silver', 'bronze'];
-  const avatarColors = ['#E2703A', '#4CC9F0', '#6C63FF', '#C99A5B', '#2A7A45'];
+  // Initial render with sorted data
+  const sortedData = sortLeaderboard([...leaderboardData]);
+  renderLeaderboard(sortedData);
 
-  tbody.innerHTML = entries
-    .map((entry, index) => {
-      const rank = index + 1;
-      const badgeClass = rankStyles[index] || '';
-      const initials = entry.user
-        .split(' ')
-        .map((n) => n[0])
-        .join('')
-        .toUpperCase();
-      const avatarColor = avatarColors[index % avatarColors.length];
+  // 3. ADD QUESTION FORM HANDLING
+  const showFormBtn = document.getElementById('show-form-btn');
+  const formContainer = document.getElementById('add-question');
+  const riddleForm = document.getElementById('riddle-form');
 
-      return `
-        <tr>
-          <td class="rank-cell">
-            <span class="rank-badge ${badgeClass}">${rank}</span>
-          </td>
-          <td>
-            <div class="user-cell">
-              <span class="avatar" style="background:${avatarColor}">${initials}</span>
-              <span>${escapeHtml(entry.user)}</span>
-            </div>
-          </td>
-          <td class="score-cell">${entry.score.toLocaleString()}</td>
-        </tr>
+  if (showFormBtn && formContainer) {
+    showFormBtn.addEventListener('click', () => {
+      if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+        formContainer.style.display = 'block';
+        formContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        showFormBtn.textContent = 'Hide Form';
+      } else {
+        formContainer.style.display = 'none';
+        showFormBtn.textContent = 'Create a Riddle';
+      }
+    });
+  }
+
+  if (riddleForm) {
+    riddleForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Collect form data
+      const formData = new FormData(riddleForm);
+      const riddleObject = {
+        title: formData.get('questionTitle'),
+        optionA: formData.get('optionA'),
+        optionB: formData.get('optionB'),
+        optionC: formData.get('optionC'),
+        optionD: formData.get('optionD'),
+        correctAnswer: formData.get('correctAnswer'),
+        submittedAt: new Date().toISOString(),
+      };
+      
+      // Mock submission - log to console
+      console.log('🎉 New Riddle Submitted:', riddleObject);
+      
+      // Show success message
+      const successMsg = document.createElement('div');
+      successMsg.textContent = '✅ Riddle submitted successfully! (Check console for data)';
+      successMsg.style.cssText = `
+        background-color: #E6F7E6;
+        color: #2E7D32;
+        padding: 12px 16px;
+        border-radius: 12px;
+        margin-top: 16px;
+        text-align: center;
+        font-weight: 500;
+        animation: fadeInUp 0.5s;
       `;
-    })
-    .join('');
-}
+      
+      // Remove any previous success message
+      const previousMsg = riddleForm.querySelector('.success-msg');
+      if (previousMsg) previousMsg.remove();
+      
+      successMsg.classList.add('success-msg');
+      riddleForm.appendChild(successMsg);
+      
+      // Reset form
+      riddleForm.reset();
+      
+      // Hide success message after 4 seconds
+      setTimeout(() => {
+        if (successMsg.parentNode) {
+          successMsg.remove();
+        }
+      }, 4000);
+    });
+  }
 
-/** Minimal HTML escaping for user-generated strings. */
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-/* --------------------------------------------------------------------------
-   IQ Test button — placeholder interaction
-   -------------------------------------------------------------------------- */
-function initIqTestButton() {
-  const btn = document.getElementById('startIqTest');
-  if (!btn) return;
-
-  btn.addEventListener('click', () => {
-    btn.textContent = 'Test starting…';
-    btn.disabled = true;
-    setTimeout(() => {
-      alert('IQ Test would launch here — hook this up to your quiz engine.');
-      btn.textContent = 'Begin IQ Test';
-      btn.disabled = false;
-    }, 500);
-  });
-}
+});
