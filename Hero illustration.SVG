@@ -1,0 +1,104 @@
+<svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="heroTitle">
+  <title id="heroTitle">Illustration of a team collaborating around a glowing biscuit-shaped puzzle stage with a floating brain</title>
+  <defs>
+    <radialGradient id="glowViolet" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8C7CFF" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#8C7CFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4CC9F0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#4CC9F0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="biscuitFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E7C596"/>
+      <stop offset="100%" stop-color="#C99A5B"/>
+    </linearGradient>
+    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A79BFF"/>
+      <stop offset="100%" stop-color="#6C63FF"/>
+    </linearGradient>
+    <linearGradient id="puzzleA" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F7B899"/>
+      <stop offset="100%" stop-color="#E2703A"/>
+    </linearGradient>
+    <linearGradient id="puzzleB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7FE0F0"/>
+      <stop offset="100%" stop-color="#4CC9F0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ambient glow -->
+  <ellipse cx="450" cy="330" rx="380" ry="300" fill="url(#glowViolet)"/>
+  <ellipse cx="620" cy="450" rx="260" ry="220" fill="url(#glowCyan)"/>
+
+  <!-- biscuit stage (broken cookie shape) -->
+  <path d="M180 470
+           C160 400, 170 320, 230 280
+           C260 200, 350 165, 430 190
+           C500 140, 600 165, 640 230
+           C720 250, 760 330, 730 400
+           C760 460, 720 530, 640 540
+           C590 610, 480 620, 420 570
+           C340 600, 250 570, 220 500
+           C195 495, 185 485, 180 470 Z"
+        fill="url(#biscuitFill)" opacity="0.9"/>
+  <!-- biscuit "chips" -->
+  <circle cx="300" cy="330" r="10" fill="#8A5A2B" opacity="0.35"/>
+  <circle cx="520" cy="260" r="8" fill="#8A5A2B" opacity="0.3"/>
+  <circle cx="600" cy="440" r="9" fill="#8A5A2B" opacity="0.3"/>
+  <circle cx="360" cy="500" r="7" fill="#8A5A2B" opacity="0.3"/>
+  <circle cx="470" cy="420" r="6" fill="#8A5A2B" opacity="0.25"/>
+
+  <!-- floating brain, centered above stage -->
+  <g transform="translate(450 300)">
+    <path d="M-60 -10
+             C-70 -45, -35 -65, -10 -55
+             C0 -68, 25 -68, 35 -55
+             C65 -60, 85 -35, 72 -10
+             C90 5, 85 35, 60 42
+             C55 62, 25 70, 5 58
+             C-15 70, -45 62, -50 42
+             C-75 35, -78 5, -60 -10 Z"
+          fill="url(#brainGrad)" stroke="#4A3FCC" stroke-width="2"/>
+    <path d="M-10 -55 C-10 -20, 0 0, 5 58" fill="none" stroke="#4A3FCC" stroke-width="1.5" opacity="0.5"/>
+    <path d="M-40 -20 C-25 -10, -25 10, -40 20" fill="none" stroke="#4A3FCC" stroke-width="1.5" opacity="0.5"/>
+    <path d="M40 -20 C25 -10, 25 10, 40 20" fill="none" stroke="#4A3FCC" stroke-width="1.5" opacity="0.5"/>
+  </g>
+
+  <!-- floating puzzle pieces -->
+  <g transform="translate(260 220) rotate(-12)">
+    <path d="M0 20 h30 a10 10 0 0 1 0 20 v10 h20 v-50 h-20 a10 10 0 0 1 0-20 h-30 z" fill="url(#puzzleA)"/>
+  </g>
+  <g transform="translate(600 190) rotate(18)">
+    <path d="M0 20 h30 a10 10 0 0 1 0 20 v10 h20 v-50 h-20 a10 10 0 0 1 0-20 h-30 z" fill="url(#puzzleB)"/>
+  </g>
+  <g transform="translate(640 340) rotate(-8)">
+    <path d="M0 20 h30 a10 10 0 0 1 0 20 v10 h20 v-50 h-20 a10 10 0 0 1 0-20 h-30 z" fill="url(#puzzleA)" opacity="0.85"/>
+  </g>
+
+  <!-- connecting glow lines -->
+  <g stroke="#8C7CFF" stroke-width="2" opacity="0.45" stroke-dasharray="4 6">
+    <line x1="330" y1="470" x2="410" y2="330"/>
+    <line x1="480" y1="470" x2="470" y2="340"/>
+    <line x1="580" y1="480" x2="520" y2="330"/>
+  </g>
+
+  <!-- abstract collaborating figures around the stage -->
+  <g>
+    <!-- figure 1 -->
+    <circle cx="330" cy="500" r="26" fill="#E2703A"/>
+    <path d="M290 570 Q330 520 370 570 L370 610 L290 610 Z" fill="#2B2118"/>
+    <!-- figure 2 -->
+    <circle cx="470" cy="510" r="26" fill="#4CC9F0"/>
+    <path d="M430 580 Q470 530 510 580 L510 620 L430 620 Z" fill="#2B2118"/>
+    <!-- figure 3 -->
+    <circle cx="580" cy="495" r="24" fill="#6C63FF"/>
+    <path d="M542 562 Q580 515 618 562 L618 600 L542 600 Z" fill="#2B2118"/>
+  </g>
+
+  <!-- small glow sparks -->
+  <circle cx="230" cy="250" r="4" fill="#4CC9F0"/>
+  <circle cx="700" cy="280" r="5" fill="#8C7CFF"/>
+  <circle cx="670" cy="470" r="4" fill="#4CC9F0"/>
+  <circle cx="250" cy="450" r="4" fill="#8C7CFF"/>
+</svg>
